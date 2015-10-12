@@ -32,6 +32,9 @@ def controleerstations():
     while eindstation not in stations:
         print("Het eindstation is niet bekend.")
         eindstation = input("Voer uw eindstation in: ")
+    while beginstation == eindstation:
+        print("Het eindstation mag niet hetzelfde zijn als het beginstation zijn.")
+        eindstation = input("Voer uw eindstation in: ")
     global gegevens
     gegevens = naam,ovnummer,beginstation,eindstation
 controleerstations()
