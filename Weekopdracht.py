@@ -21,6 +21,7 @@ def nsAPI():
         a.append(station["Namen"]["Kort"])
         a.append(station["Namen"]["Lang"])
         a.append(station["Namen"]["Middel"])
+        a.append(station["Code"])
 nsAPI()
 def welkomprint():
     print("Welkom bij de NS. \nVoer nu onderstaande informatie in om verder te gaan.")
