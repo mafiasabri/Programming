@@ -1,4 +1,2 @@
-__author__ = 'idris'
-print("tessdft")
-"""hier gaan we in bouwen boys"""
+#Dit is de weekopdracht van programmeren.
 
