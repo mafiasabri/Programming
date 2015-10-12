@@ -14,7 +14,9 @@ def nsAPI():
     stations = response.text
 nsAPI()
 
-print("Welkom bij de NS. \nVoer nu onderstaande informatie in om verder te gaan.")
+def welkomprint():
+    print("Welkom bij de NS. \nVoer nu onderstaande informatie in om verder te gaan.")
+welkomprint()
 
 def controleerstations():
     naam = input("Voer uw naam in: ")
@@ -27,9 +29,9 @@ def controleerstations():
     while eindstation not in stations:
         print("Het eindstation is niet bekend.")
         eindstation = input("Voer uw eindstation in: ")
+    global gegevens
     gegevens = naam,ovnummer,beginstation,eindstation
 controleerstations()
-
 
 def generateQR():
     global gegevens
@@ -38,7 +40,6 @@ def generateQR():
             box_size=10,
             border=4,
             )
-
     qr.add_data(gegevens)
     qr.make(fit=True)
     print(qr.get_matrix())
