@@ -4,10 +4,6 @@
 #qrcode
 #pip
 
-naam = input("Voer uw naam in: ")
-ovnummer = int(input("Voer uw ov-chipkaartnummer: "))
-beginstation = input("Voer uw beginstation in: ")
-eindstation = input("Voer uw eindstation in: ")
 
 gegevens = naam,ovnummer,beginstation,eindstation
 
