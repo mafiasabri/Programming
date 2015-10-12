@@ -20,33 +20,29 @@ def controleerstations():
     naam = input("Voer uw naam in: ")
     ovnummer = int(input("Voer uw ov-chipkaartnummer: "))
     beginstation = input("Voer uw beginstation in: ")
-    eindstation = input("Voer uw eindstation in: ")
-    gegevens = naam,ovnummer,beginstation,eindstation
-    if beginstation not in stations:
+    while beginstation not in stations:
         print("Het beginstation is niet bekend.")
-        beginstation
-    elif eindstation not in stations:
+        beginstation = input("Voer uw beginstation in: ")
+    eindstation = input("Voer uw eindstation in: ")
+    while eindstation not in stations:
         print("Het eindstation is niet bekend.")
-        eindstation
-    elif eindstation and beginstation not in stations:
-        print("Het begin en eindstation is niet bekend. ")
+        eindstation = input("Voer uw eindstation in: ")
+    gegevens = naam,ovnummer,beginstation,eindstation
 controleerstations()
 
 
-#
-#
-#
-# def generateQR():
-#     qr = qrcode.QRCode(version=1,
-#             error_correction=qrcode.constants.ERROR_CORRECT_L,
-#             box_size=10,
-#             border=4,
-#             )
-#
-#     qr.add_data(gegevens)
-#     qr.make(fit=True)
-#     print(qr.get_matrix())
-#     img = qr.make_image()
-#     img.show()
-# generateQR()
+def generateQR():
+    global gegevens
+    qr = qrcode.QRCode(version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+            )
+
+    qr.add_data(gegevens)
+    qr.make(fit=True)
+    print(qr.get_matrix())
+    img = qr.make_image()
+    img.show()
+generateQR()
 
