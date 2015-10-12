@@ -25,5 +25,4 @@ def generateQR():
     print(qr.get_matrix())
     img = qr.make_image()
     img.show()
-
 generateQR()
