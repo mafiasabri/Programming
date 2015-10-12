@@ -1,2 +1,1 @@
-__author__ = 'idris'
-print("sabri is gay.")
+print("hallo world")
