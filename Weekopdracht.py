@@ -14,10 +14,13 @@ def nsAPI():
     auth_details = ("hjr.tielemans@gmail.com", "sz3XpDnQ5EVcA8Gg4FhuWICzhJgmMOnehAIoElLW3iVP1wyJ5p8OuQ")
     response = requests.get('http://webservices.ns.nl/ns-api-stations-v2',
     auth=auth_details)
+    response.encoding = "utf-8"
     global stations
     stations=xmltodict.parse(response.text)["Stations"]["Station"]
     for station in stations:
-        a.append(station["Code"])
+        a.append(station["Namen"]["Kort"])
+        a.append(station["Namen"]["Lang"])
+        a.append(station["Namen"]["Middel"])
 nsAPI()
 def welkomprint():
     print("Welkom bij de NS. \nVoer nu onderstaande informatie in om verder te gaan.")
@@ -87,3 +90,5 @@ def generateQR():
     qr.get_matrix()
     img = qr.make_image()
     img.show()
+
+controleerstations()
