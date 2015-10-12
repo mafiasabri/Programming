@@ -1,16 +1,15 @@
-#Dit is de weekopdracht van programmeren.
+#import list:
+#Pillow
+#PyQRCode
+#qrcode
+#pip
 
+naam = input("Voer uw naam in: ")
+ovnummer = int(input("Voer uw ov-chipkaartnummer: "))
+beginstation = input("Voer uw beginstation in: ")
+eindstation = input("Voer uw eindstation in: ")
 
-# import list:
-# Pillow
-# PyQRCode
-# qrcode
-# pip
-
-naam=input("Wat is uw naam? ")
-id=input("Wat s uw OV-nummer?")
-
-gegevens=naam,id
+gegevens=naam,ovnummer,beginstation,eindstation
 
 import qrcode
 def generateQR():
