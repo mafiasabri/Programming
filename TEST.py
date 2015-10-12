@@ -1,2 +1,2 @@
 print("hallo world")
-print("sabri is super gay")
+print("sabri is jsuper gay")
