@@ -21,20 +21,28 @@ def input_integer(prompt):
         print("De invoer is niet correct. Probeer het opnieuw.")
         return input_integer(prompt)
 
+def input_character(prompt):
+    invoer = input(prompt)
+    if invoer and invoer.isalpha():
+        return str(invoer)
+    else:
+        print("De invoer is niet correct. Probeer het opnieuw.")
+        return input_character(prompt)
+
 def controleerstations():
     naam = input("Voer uw naam in: ")
     ovnummer = input_integer("Voer uw ov-chipkaartnummer in: ")
-    beginstation = input("Voer uw beginstation in: ")
+    beginstation = input_character("Voer uw beginstation in: ")
     while beginstation not in stations:
         print("Het beginstation is niet bekend.")
-        beginstation = input("Voer uw beginstation in: ")
+        beginstation = input_character("Voer uw beginstation in: ")
     eindstation = input("Voer uw eindstation in: ")
     while eindstation not in stations:
         print("Het eindstation is niet bekend.")
         eindstation = input("Voer uw eindstation in: ")
     while beginstation == eindstation:
         print("Het eindstation mag niet hetzelfde zijn als het beginstation zijn.")
-        eindstation = input("Voer uw eindstation in: ")
+        eindstation = input_character("Voer uw eindstation in: ")
     global gegevens
     gegevens = naam,ovnummer,beginstation,eindstation
 controleerstations()
@@ -42,7 +50,7 @@ controleerstations()
 def generateQR():
     global gegevens
     qr = qrcode.QRCode(version=1,
-            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            error_correction=qrcode.constants.ERROR_CORRECT_H,
             box_size=10,
             border=4,
             )
