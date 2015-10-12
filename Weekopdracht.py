@@ -21,6 +21,7 @@ def nsAPI():
 nsAPI()
 def welkomprint():
     print("Welkom bij de NS. \nVoer nu onderstaande informatie in om verder te gaan.")
+
 def input_integer(prompt):
     """
     De input moet bestaan uit enkel getallen, als dit niet het geval is wordt dit aangegeven.
