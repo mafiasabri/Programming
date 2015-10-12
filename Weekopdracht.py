@@ -1,8 +1,3 @@
-#import list:
-#Pillow
-#PyQRCode
-#qrcode
-#pip
 import qrcode
 import requests
 
@@ -18,9 +13,17 @@ def welkomprint():
     print("Welkom bij de NS. \nVoer nu onderstaande informatie in om verder te gaan.")
 welkomprint()
 
+def input_integer(prompt):
+    invoer = input(prompt)
+    if invoer and invoer.isdigit():
+        return int(invoer)
+    else:
+        print("De invoer is niet correct. Probeer het opnieuw.")
+        return input_integer(prompt)
+
 def controleerstations():
     naam = input("Voer uw naam in: ")
-    ovnummer = int(input("Voer uw ov-chipkaartnummer: "))
+    ovnummer = input_integer("Voer uw ov-chipkaartnummer in: ")
     beginstation = input("Voer uw beginstation in: ")
     while beginstation not in stations:
         print("Het beginstation is niet bekend.")
@@ -46,4 +49,7 @@ def generateQR():
     img = qr.make_image()
     img.show()
 generateQR()
+
+
+
 
