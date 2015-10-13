@@ -6,8 +6,8 @@ import os
 import os.path
 from tkinter import *
 
-f = os.path.isfile("Reizigers.sql")
-conn = sqlite3.connect('Reizigers.sql')
+f = os.path.isfile("Reizigers.db")
+conn = sqlite3.connect('Reizigers.db')
 c = conn.cursor()
 random_number = random.randint(10000, 99000)
 
