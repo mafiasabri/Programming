@@ -5,7 +5,8 @@ import requests
 import os
 import os.path
 from tkinter import *
-
+import datetime
+import time
 
 random_number = random.randint(10000, 99000)
 
@@ -26,8 +27,9 @@ def dataEntry():
     :return: None
     """
     with conn:
+        date = str(datetime.datetime.fromtimestamp(int(time.time())).strftime('%Y%m%d%H%M%S'))
         c.execute("INSERT INTO ReizigersDB (ID, Naam, OVnummer, Beginstation, Eindstation) VALUES (?, ?, ?, ?, ?)",
-                  (random_number, gegevens[0], gegevens[1], gegevens[2], gegevens[3]))
+                  ((date + gegevens[1]), gegevens[0], gegevens[1], gegevens[2], gegevens[3]))
 
 
 def nsAPI():
