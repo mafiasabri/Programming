@@ -12,20 +12,24 @@ c = conn.cursor()
 random_number = random.randint(10000, 99000)
 
 def tableCreate():
+    """
+    Deze functie maakt een nieuw tabel aan in de database
+    :return: None
+    """
     if f == False:
         c.execute("CREATE TABLE ReizigersDB(ID INT, Naam TEXT, OVnummer INT, Beginstation TEXT, Eindstation TEXT)")
     elif f == True:
         print("")
 
 
-def dataEntry():
+def dataEntry(gegevens):
+    """
+    Deze functie voegt de input van de gebruiker in de functie tableCreate():
+    :return: None
+    """
     with conn:
         c.execute("INSERT INTO ReizigersDB (ID, Naam, OVnummer, Beginstation, Eindstation) VALUES (?, ?, ?, ?, ?)",
                   (random_number, gegevens[0], gegevens[1], gegevens[2], gegevens[3]))
-
-
-tableCreate()
-
 
 
 
@@ -34,28 +38,29 @@ def nsAPI():
     Doormiddel van deze functie worden de stations uit nsAPI gehaald.
     Deze stations worden later in de functie controleerstations() gebruikt
     om de input van de gebruiker te controleren
+    :return: stations
     """
     auth_details = ("hjr.tielemans@gmail.com", "sz3XpDnQ5EVcA8Gg4FhuWICzhJgmMOnehAIoElLW3iVP1wyJ5p8OuQ")
     response = requests.get('http://webservices.ns.nl/ns-api-stations-v2',
                             auth=auth_details)
-    global stations
+    #global stations
     stations = response.text
-
-
-nsAPI()
-
+    return stations
 
 def welkomprint():
+    """
+    Toont introductie en instructie.
+    :return:None
+    """
     print("Welkom bij de NS. \nVoer nu onderstaande informatie in om verder te gaan.")
 
-
-welkomprint()
 
 
 def input_integer(prompt):
     """
     De input moet bestaan uit enkel getallen, als dit niet het geval is wordt dit aangegeven.
     De functie zal dan vragen om een nieuwe input.
+    :return:None
     """
     invoer = input(prompt)
     if invoer and invoer.isdigit():
@@ -69,6 +74,7 @@ def input_character(prompt):
     """
     De input moet bestaan uit enkel letters, als dit niet het geval is wordt dit aangegeven.
     De functie zal dan vragen om een nieuwe input.
+    :return:None
     """
     invoer = input(prompt)
     if invoer and invoer.isalpha():
@@ -78,7 +84,7 @@ def input_character(prompt):
         return input_character(prompt)
 
 
-def controleerstations():
+def controle():
     """
     In deze functie worden de:
     naam, ovnummer, beginstation en eindstation ingevoerd door de gebruiker.
@@ -87,8 +93,14 @@ def controleerstations():
     Al deze bovenstaande gegevens worden opgeslagen in gegevens
 
     """
+    stations = nsAPI()
     naam = input("Voer uw naam in: ")
     ovnummer = input_integer("Voer uw ov-chipkaartnummer in: ")
+    ovnummer = str(ovnummer)
+    while len(ovnummer) != 5:
+        print("Error! Voer een geldige 16 cijferige ov-chipkaartnummer in!")
+        ovnummer = input_integer("Voer uw ov-chipkaartnummer in: ")
+        ovnummer = str(ovnummer)
     beginstation = input_character("Voer uw beginstation in: ")
     while beginstation not in stations:
         print("Het beginstation is niet bekend.")
@@ -100,30 +112,25 @@ def controleerstations():
     while beginstation == eindstation:
         print("Het eindstation mag niet hetzelfde zijn als het beginstation zijn.")
         eindstation = input_character("Voer uw eindstation in: ")
-    global gegevens
     gegevens = naam, ovnummer, beginstation, eindstation
-    dataEntry()
-
-controleerstations()
+    return gegevens
 
 
-def generateQR():
+def generateQR(gegevens):
     """
-    Deze functie genereert een QR-code op basis van de bovenstaande code(controleerstations())
+    Deze functie genereert een QR-code op basis van de bovenstaande functie controle()
     Dit gebeurt op basis van de input van de gebruiker. De input is opgeslagen in gegevens.
     """
-    global gegevens
     qr = qrcode.QRCode(version=1,
                        error_correction=qrcode.constants.ERROR_CORRECT_H,
                        box_size=10,
-                       border=4,
-    )
+                       border=4,)
     qr.add_data(gegevens)
     qr.make(fit=True)
     return(qr.get_matrix())
     img = qr.make_image()
     img.show()
-generateQR()
+
 
 def invoer_incheckzuil():
     global e1
@@ -135,7 +142,7 @@ def invoer_incheckzuil():
     mainloop()
     Z = e1.get()
     return Z
-invoer_incheckzuil()
+
 
 def vergelijk_database():
     global Z
@@ -158,6 +165,12 @@ def vergelijk_database():
 
         print(row[0], row[1], row[2])
 
-
+tableCreate()
+nsAPI()
+welkomprint()
+gegevens = controle()
+dataEntry(gegevens)
+generateQR(gegevens)
+invoer_incheckzuil()
 vergelijk_database()
 
