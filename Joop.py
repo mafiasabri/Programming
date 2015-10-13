@@ -1,3 +1,4 @@
+__author__ = 'Jalal'
 import sqlite3
 import random
 import qrcode
