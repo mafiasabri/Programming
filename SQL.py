@@ -6,17 +6,19 @@ import os
 import os.path
 from tkinter import *
 
-
+f = os.path.isfile("Reizigers.db")
+conn = sqlite3.connect('Reizigers.db')
+c = conn.cursor()
 random_number = random.randint(10000, 99000)
 
-def tableCreate(f,c):
+def tableCreate():
     """
     Deze functie maakt een nieuw tabel aan in de database
     :return: None
     """
-    if not f:
+    if f == False:
         c.execute("CREATE TABLE ReizigersDB(ID INT, Naam TEXT, OVnummer INT, Beginstation TEXT, Eindstation TEXT)")
-    else :
+    elif f == True:
         print("")
 
 
@@ -82,7 +84,7 @@ def input_character(prompt):
         return input_character(prompt)
 
 
-def controle_gegevens():
+def controle():
     """
     In deze functie worden de:
     naam, ovnummer, beginstation en eindstation ingevoerd door de gebruiker.
@@ -125,7 +127,6 @@ def generateQR(gegevens):
                        border=4,)
     qr.add_data(gegevens)
     qr.make(fit=True)
-    print(qr.get_matrix())
     img = qr.make_image()
     img.show()
 
@@ -142,36 +143,21 @@ def invoer_incheckzuil():
     return Z
 
 
-def vergelijk_database():
-    global Z
-    global conn
-    # for row in conn:
-    #     if f == row:
-    #         print( row[0])
-    #     else:
-    #         print("werkt niet")
-    #
+def vergelijk_database(Z):
     with conn:
+        c = conn.cursor()
+        t = (Z,)
+    for row in c.execute('SELECT * FROM ReizigersDB'):
+        if row in c.execute('SELECT * FROM ReizigersDB WHERE OVnummer=?', t):
+            print(row)
+        else:
+            print("U heeft nog geen reis gemaakt of een verkeerd OVnummer ingetyped")
 
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM ReizigersDB")
-
-    while True:
-        row = cur.fetchone()
-        if row == None:
-            break
-
-        print(row[0], row[1], row[2])
-
-
-f = os.path.isfile("Reizigers.db")
-conn = sqlite3.connect('Reizigers.db')
-c = conn.cursor()
-tableCreate(f,c)
+tableCreate()
 nsAPI()
 welkomprint()
-gegevens = controle_gegevens()
+gegevens = controle()
 dataEntry()
 generateQR(gegevens)
-invoer_incheckzuil()
-vergelijk_database()
+vergelijk_database(invoer_incheckzuil())
+
