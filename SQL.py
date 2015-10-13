@@ -2,7 +2,7 @@ import sqlite3
 import random
 import qrcode
 import requests
-
+import os
 
 
 # Database verwerking!
@@ -13,8 +13,10 @@ c = conn.cursor()
 random_number = random.randint(10000, 99000)
 
 def tableCreate():
-    if 'Reizigers.db' == None:
-        c.execute("CREATE TABLE ReizigersDB(ID INT, Naam TEXT, OVnummer INT, Beginstation TEXT, Eindstation TEXT)")
+   if os.path.exists('Reizigers.db'):
+       pass
+   else:
+       c.execute("CREATE TABLE ReizigersDB(ID INT, Naam TEXT, OVnummer INT, Beginstation TEXT, Eindstation TEXT)")
 
 
 
