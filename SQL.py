@@ -4,7 +4,7 @@ import qrcode
 import requests
 import os
 import os.path
-
+from tkinter import *
 
 f = os.path.isfile("Reizigers.sql")
 conn = sqlite3.connect('Reizigers.sql')
@@ -120,10 +120,44 @@ def generateQR():
     )
     qr.add_data(gegevens)
     qr.make(fit=True)
-    print(qr.get_matrix())
+    return(qr.get_matrix())
     img = qr.make_image()
     img.show()
-
-
 generateQR()
+
+def invoer_incheckzuil():
+    global e1
+    master = Tk()
+    Label(master, text="Voer ov-chipkaartnummer in").grid(row=0)
+    e1 = Entry(master)
+    e1.grid(row=0, column=1)
+    Button(master, text='Invoeren', command=master.quit).grid(row=0, column=4 , sticky=W, pady=20)
+    mainloop()
+    Z = e1.get()
+    return Z
+invoer_incheckzuil()
+
+def vergelijk_database():
+    global Z
+    global conn
+    # for row in conn:
+    #     if f == row:
+    #         print( row[0])
+    #     else:
+    #         print("werkt niet")
+    #
+    with conn:
+
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM ReizigersDB")
+
+    while True:
+        row = cur.fetchone()
+        if row == None:
+            break
+
+        print(row[0], row[1], row[2])
+
+
+vergelijk_database()
 
