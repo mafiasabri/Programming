@@ -142,26 +142,15 @@ def invoer_incheckzuil():
     return Z
 
 
-def vergelijk_database():
-    global Z
-    global conn
-    # for row in conn:
-    #     if f == row:
-    #         print( row[0])
-    #     else:
-    #         print("werkt niet")
-    #
+def vergelijk_database(Z):
     with conn:
-
-        cur = conn.cursor()
-        cur.execute("SELECT * FROM ReizigersDB")
-
-    while True:
-        row = cur.fetchone()
-        if row == None:
-            break
-
-        print(row[0], row[1], row[2])
+        c = conn.cursor()
+        t = (Z,)
+    for row in c.execute('SELECT * FROM ReizigersDB'):
+        if row in c.execute('SELECT * FROM ReizigersDB WHERE OVnummer=?', t):
+            print(row)
+        else:
+            print("U heeft nog geen reis gemaakt of een verkeerd OVnummer ingetyped")
 
 
 f = os.path.isfile("Reizigers.db")
