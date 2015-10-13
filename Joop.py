@@ -31,7 +31,6 @@ def dataEntry():
                   (random_number, gegevens[0], gegevens[1], gegevens[2], gegevens[3]))
 
 
-
 def nsAPI():
     """
     Doormiddel van deze functie worden de stations uit nsAPI gehaald.
@@ -46,13 +45,13 @@ def nsAPI():
     stations = response.text
     return stations
 
+
 def welkomprint():
     """
     Toont introductie en instructie.
     :return:None
     """
     print("Welkom bij de NS. \nVoer nu onderstaande informatie in om verder te gaan.")
-
 
 
 def input_integer(prompt):
@@ -62,7 +61,7 @@ def input_integer(prompt):
     :return:None
     """
     invoer = input(prompt)
-    if invoer and invoer.isdigit():
+    while invoer and invoer.isdigit() == True:
         return int(invoer)
     else:
         print("De invoer is niet correct. Probeer het opnieuw.")
@@ -76,7 +75,7 @@ def input_character(prompt):
     :return:None
     """
     invoer = input(prompt)
-    if invoer and invoer.isalpha():
+    while invoer and invoer.isalpha()== True:
         return str(invoer)
     else:
         print("De invoer is niet correct. Probeer het opnieuw.")
@@ -126,7 +125,7 @@ def generateQR(gegevens):
                        border=4,)
     qr.add_data(gegevens)
     qr.make(fit=True)
-    print(qr.get_matrix())
+    qr.get_matrix()
     img = qr.make_image()
     img.show()
 
