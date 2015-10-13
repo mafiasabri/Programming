@@ -22,7 +22,7 @@ def tableCreate():
         print("")
 
 
-def dataEntry(gegevens):
+def dataEntry():
     """
     Deze functie voegt de input van de gebruiker in de functie tableCreate():
     :return: None
@@ -169,7 +169,7 @@ tableCreate()
 nsAPI()
 welkomprint()
 gegevens = controle()
-dataEntry(gegevens)
+dataEntry()
 generateQR(gegevens)
 invoer_incheckzuil()
 vergelijk_database()
