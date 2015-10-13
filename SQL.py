@@ -127,7 +127,7 @@ def generateQR(gegevens):
                        border=4,)
     qr.add_data(gegevens)
     qr.make(fit=True)
-    return(qr.get_matrix())
+    print(qr.get_matrix())
     img = qr.make_image()
     img.show()
 
