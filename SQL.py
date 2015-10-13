@@ -3,21 +3,19 @@ import random
 import qrcode
 import requests
 import os
+import os.path
 
 
-# Database verwerking!
-
-
-conn = sqlite3.connect('Reizigers.db')
+f = os.path.isfile("Reizigers.sql")
+conn = sqlite3.connect('Reizigers.sql')
 c = conn.cursor()
 random_number = random.randint(10000, 99000)
 
 def tableCreate():
-   if os.path.exists('Reizigers.db'):
-       pass
-   else:
-       c.execute("CREATE TABLE ReizigersDB(ID INT, Naam TEXT, OVnummer INT, Beginstation TEXT, Eindstation TEXT)")
-
+    if f == False:
+        c.execute("CREATE TABLE ReizigersDB(ID INT, Naam TEXT, OVnummer INT, Beginstation TEXT, Eindstation TEXT)")
+    elif f == True:
+        print("")
 
 
 def dataEntry():
