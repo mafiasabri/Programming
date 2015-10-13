@@ -130,7 +130,6 @@ def generateQR(gegevens):
 
 
 def invoer_incheckzuil():
-    global e1
     master = Tk()
     Label(master, text="Voer ov-chipkaartnummer in").grid(row=0)
     e1 = Entry(master)
@@ -151,6 +150,12 @@ def vergelijk_database(Z):
         else:
             print("U heeft nog geen reis gemaakt of een verkeerd OVnummer ingetyped")
 
+# Zorg als laatste dat je voor de NS­marketingafdeling een (automatisch) overzicht genereert van:
+# ● het aantal reizen per ov­chipkaart,
+# ● de populairste bestemmingen, en
+# ● de populairste vertrekstations.
+
+# def database_leeghalen:
 
 f = os.path.isfile("Reizigers.db")
 conn = sqlite3.connect('Reizigers.db')
@@ -161,5 +166,4 @@ welkomprint()
 gegevens = controle_gegevens()
 dataEntry()
 generateQR(gegevens)
-invoer_incheckzuil()
-vergelijk_database()
+vergelijk_database(invoer_incheckzuil())
