@@ -15,7 +15,7 @@ def tableCreate(f,c):
     :return: None
     """
     if not f:
-        c.execute("CREATE TABLE ReizigersDB(ID CHAR(50), Naam TEXT, OVnummer INT, Beginstation TEXT, Eindstation TEXT)")
+        c.execute("CREATE TABLE ReizigersDB(ID CHAR(100), Naam TEXT, OVnummer INT, Beginstation TEXT, Eindstation TEXT)")
     else:
         print("")
 
@@ -29,7 +29,8 @@ def dataEntry():
     with conn:
         date = str(datetime.datetime.fromtimestamp(int(time.time())).strftime("%Y%m%d%H%M%S"))
         c.execute("INSERT INTO ReizigersDB (ID, Naam, OVnummer, Beginstation, Eindstation) VALUES (?, ?, ?, ?, ?)",
-                  (date + gegevens[1], gegevens[0], gegevens[1], gegevens[2], gegevens[3]))
+                  (date + ',' + gegevens[1] + ',' + gegevens[0] + ',' + gegevens[2] + ',' + gegevens[3] , gegevens[0], gegevens[1], gegevens[2], gegevens[3]))
+
 
 
 def nsAPI():
