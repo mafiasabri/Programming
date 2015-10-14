@@ -121,8 +121,9 @@ def generateQR(gegevens):
     Deze functie genereert een QR-code op basis van de reizigersID
     Dit gebeurt op basis van de input van de gebruiker. De input is opgeslagen in gegevens.
     """
-    img = qrcode.make(("Uw unieke reis ID is: ") + dataEntry() +  ("\n") + (str("Uw naam is: ") + gegevens[0] + ("\n") + str("Uw OV-kaart nummer is: ") + gegevens[1] +("\n") + str("Uw beginstation is: ") + gegevens[2] + str("\n") + str("Uw eindstation is: ") + gegevens[3]))
+    img = qrcode.make(("Uw unieke reis ID is: ") + dataEntry() +  ("\n\n") + (str("Uw naam is: ") + gegevens[0] + ("\n") + str("Uw OV-kaart nummer is: ") + gegevens[1] +("\n") + str("Uw beginstation is: ") + gegevens[2] + str("\n") + str("Uw eindstation is: ") + gegevens[3]))
     img.show()
+
 
 f = os.path.isfile("Reizigers.db")
 conn = sqlite3.connect("Reizigers.db")
