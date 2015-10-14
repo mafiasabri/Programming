@@ -11,7 +11,7 @@ import time
 
 def tableCreate(f,c):
     """
-    Deze functie maakt een nieuw tabel aan in de database
+    Deze functie maakt eenmalig een tabel aan in de database.
     :return: None
     """
     if not f:
@@ -22,7 +22,8 @@ def tableCreate(f,c):
 
 def dataEntry():
     """
-    Deze functie voegt de input van de gebruiker in de functie tableCreate():
+    Deze functie voegt de input(controle_gegevens()) van de gebruiker toe in de database. Daarnaast genereert de functie
+    een unieke reizigersID.
     :return: None
     """
     with conn:
@@ -34,8 +35,7 @@ def dataEntry():
 def nsAPI():
     """
     Doormiddel van deze functie worden de stations uit nsAPI gehaald.
-    Deze stations worden later in de functie controleerstations() gebruikt
-    om de input van de gebruiker te controleren
+    Deze stations worden later in de functie controle_gegevens() gebruikt.
     :return: stations
     """
     auth_details = ("hjr.tielemans@gmail.com", "sz3XpDnQ5EVcA8Gg4FhuWICzhJgmMOnehAIoElLW3iVP1wyJ5p8OuQ")
@@ -58,7 +58,7 @@ def input_integer(prompt):
     """
     De input moet bestaan uit enkel getallen, als dit niet het geval is wordt dit aangegeven.
     De functie zal dan vragen om een nieuwe input.
-    :return:None
+    :return:int(invoer)
     """
     invoer = input(prompt)
     while invoer and invoer.isdigit() == True:
@@ -72,7 +72,7 @@ def input_character(prompt):
     """
     De input moet bestaan uit enkel letters, als dit niet het geval is wordt dit aangegeven.
     De functie zal dan vragen om een nieuwe input.
-    :return:None
+    :return:str(invoer)
     """
     invoer = input(prompt)
     while invoer and invoer.isalpha()== True:
@@ -84,15 +84,17 @@ def input_character(prompt):
 
 def controle_gegevens():
     """
-    In deze functie worden de:
-    naam, ovnummer, beginstation en eindstation ingevoerd door de gebruiker.
-    Bij ovnummer is alleen een input geldig van nummers
-    Daarnaast moet het begin en eindstation niet hetzelfde zijn en moeten beide in nsAPI voorkomen
-    Al deze bovenstaande gegevens worden opgeslagen in gegevens
-
+    In deze functie wordt er gevraagd om de input van de gebruikers, met als criteria:
+    naam, ovnummer, beginstation en eindstation.
+    Bij naam is alleen een input van letters geldig.
+    Bij ovnummer is alleen een input geldig van nummers.
+    Het beginstation en eindstation moet voorkomen in de nsAPI.
+    Daarnaast mogen het begin en eindstation niet hetzelfde zijn.
+    Als de bovenstaande gegevens correct zijn worden opgeslagen in gegevens
+    :return:gegevens
     """
     stations = nsAPI()
-    naam = input("Voer uw naam in: ")
+    naam = input_character("Voer uw naam in: ")
     ovnummer = input_integer("Voer uw ov-chipkaartnummer in: ")
     ovnummer = str(ovnummer)
     while len(ovnummer) != 8:
@@ -116,7 +118,7 @@ def controle_gegevens():
 
 def generateQR(gegevens):
     """
-    Deze functie genereert een QR-code op basis van de bovenstaande functie controle()
+    Deze functie genereert een QR-code op basis van de reizigersID
     Dit gebeurt op basis van de input van de gebruiker. De input is opgeslagen in gegevens.
     """
     img = qrcode.make((str("Uw naam is: ") + gegevens[0] +("\n") + str("Uw OV-kaart nummer is: ") + gegevens[1] +("\n")
