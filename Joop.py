@@ -29,7 +29,7 @@ def dataEntry():
 
     with conn:
         date = str(datetime.datetime.fromtimestamp(int(time.time())).strftime("%Y%m%d%H%M%S"))
-        uniekID = (date + ',' + gegevens[1] + ',' + gegevens[0] + ',' + gegevens[2] + ',' + gegevens[3])
+        uniekID = (date + gegevens[1])
         c.execute("INSERT INTO ReizigersDB (ID, Naam, OVnummer, Beginstation, Eindstation) VALUES (?, ?, ?, ?, ?)",
                   (uniekID, gegevens[0], gegevens[1], gegevens[2], gegevens[3]))
     return uniekID
@@ -87,7 +87,6 @@ def input_character(prompt):
 def controle_gegevens():
     """
     In deze functie wordt er gevraagd om de input van de gebruikers, met als criteria:
-    naam, ovnummer, beginstation en eindstation.
     Bij ovnummer is alleen een input geldig van nummers.
     Het beginstation en eindstation moet voorkomen in de nsAPI.
     Daarnaast mogen het begin en eindstation niet hetzelfde zijn.
@@ -122,7 +121,7 @@ def generateQR(gegevens):
     Deze functie genereert een QR-code op basis van de reizigersID
     Dit gebeurt op basis van de input van de gebruiker. De input is opgeslagen in gegevens.
     """
-    img = qrcode.make(dataEntry())
+    img = qrcode.make(("Uw unieke reis ID is: ") + dataEntry() +  ("\n") + (str("Uw naam is: ") + gegevens[0] + ("\n") + str("Uw OV-kaart nummer is: ") + gegevens[1] +("\n") + str("Uw beginstation is: ") + gegevens[2] + str("\n") + str("Uw eindstation is: ") + gegevens[3]))
     img.show()
 
 
