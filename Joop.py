@@ -67,9 +67,8 @@ def input_integer(prompt):
     invoer = input(prompt)
     while invoer and invoer.isdigit() == True:
         return int(invoer)
-    else:
-        print("De invoer is niet correct. Probeer het opnieuw.")
-        return input_integer(prompt)
+    print("De invoer is niet correct en moet bestaan uit cijfers. Probeer het opnieuw.")
+    return input_integer(prompt)
 
 
 def input_character(prompt):
