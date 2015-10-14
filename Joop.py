@@ -32,6 +32,8 @@ def dataEntry():
         uniekID = (date + ',' + gegevens[1] + ',' + gegevens[0] + ',' + gegevens[2] + ',' + gegevens[3])
         c.execute("INSERT INTO ReizigersDB (ID, Naam, OVnummer, Beginstation, Eindstation) VALUES (?, ?, ?, ?, ?)",
                   (uniekID , gegevens[0], gegevens[1], gegevens[2], gegevens[3]))
+    return uniekID
+
 
 
 
@@ -88,7 +90,6 @@ def controle_gegevens():
     """
     In deze functie wordt er gevraagd om de input van de gebruikers, met als criteria:
     naam, ovnummer, beginstation en eindstation.
-    Bij naam is alleen een input van letters geldig.
     Bij ovnummer is alleen een input geldig van nummers.
     Het beginstation en eindstation moet voorkomen in de nsAPI.
     Daarnaast mogen het begin en eindstation niet hetzelfde zijn.
@@ -96,7 +97,7 @@ def controle_gegevens():
     :return:gegevens
     """
     stations = nsAPI()
-    naam = input_character("Voer uw naam in: ")
+    naam = input("Voer uw naam in: ")
     ovnummer = input_integer("Voer uw ov-chipkaartnummer in: ")
     ovnummer = str(ovnummer)
     while len(ovnummer) != 8:
@@ -123,8 +124,7 @@ def generateQR(gegevens):
     Deze functie genereert een QR-code op basis van de reizigersID
     Dit gebeurt op basis van de input van de gebruiker. De input is opgeslagen in gegevens.
     """
-    img = qrcode.make((str("Uw naam is: ") + gegevens[0] + ("\n") + str("Uw OV-kaart nummer is: ") + gegevens[1] +("\n")
-    + str("Uw beginstation is: ") + gegevens[2] + str("\n") + str("Uw eindstation is: ") + gegevens[3]))
+    img = qrcode.make(dataEntry())
     img.show()
 
 
@@ -163,6 +163,5 @@ tableCreate(f,c)
 nsAPI()
 welkomprint()
 gegevens = controle_gegevens()
-dataEntry()
 generateQR(gegevens)
 vergelijk_database(invoer_incheckzuil())
