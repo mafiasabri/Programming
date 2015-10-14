@@ -1,8 +1,12 @@
 from tkinter import *
 import sqlite3
 
-"""Invoer in de incheckzuil via TKinter"""
+
 def invoer_incheckzuil():
+    """
+    Invoer in de incheckzuil via TKinter
+    :return: invoer
+    """
     TKintermenu = Tk()
     Label(TKintermenu, text="Voer ov-chipkaartnummer in").grid(row=0)
     invoerveld = Entry(TKintermenu)
@@ -12,14 +16,20 @@ def invoer_incheckzuil():
     invoer = invoerveld.get()
     return invoer
 
-"""Vergelijkt invoer van de vorige functie in de database en aan de hand van de invoer informatie aan de gebruiker"""
+
 def vergelijk_database(invoer):
+    """
+    Vergelijkt invoer van de vorige functie in de database en aan de hand van de invoer informatie aan de gebruiker
+    :param invoer:
+    :return: None
+    """
     conn = sqlite3.connect('Reizigers.db')
     cursor = conn.cursor()
     waardeinvoer = (invoer,)
     databasewaarden = cursor.execute('SELECT * FROM ReizigersDB WHERE OVnummer =?', waardeinvoer)
     resultaten = databasewaarden.fetchall()
     teller = len(resultaten)
+    print(teller)
     if teller == 0:
         print("Dit OVnummer is nog niet in onze database bekend.")
     for row in resultaten:
