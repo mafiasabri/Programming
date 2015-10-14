@@ -88,7 +88,6 @@ def controle_gegevens():
     """
     In deze functie wordt er gevraagd om de input van de gebruikers, met als criteria:
     naam, ovnummer, beginstation en eindstation.
-    Bij naam is alleen een input van letters geldig.
     Bij ovnummer is alleen een input geldig van nummers.
     Het beginstation en eindstation moet voorkomen in de nsAPI.
     Daarnaast mogen het begin en eindstation niet hetzelfde zijn.
@@ -96,7 +95,7 @@ def controle_gegevens():
     :return:gegevens
     """
     stations = nsAPI()
-    naam = input_character("Voer uw naam in: ")
+    naam = input("Voer uw naam in: ")
     ovnummer = input_integer("Voer uw ov-chipkaartnummer in: ")
     ovnummer = str(ovnummer)
     while len(ovnummer) != 8:
