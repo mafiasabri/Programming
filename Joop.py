@@ -119,15 +119,8 @@ def generateQR(gegevens):
     Deze functie genereert een QR-code op basis van de bovenstaande functie controle()
     Dit gebeurt op basis van de input van de gebruiker. De input is opgeslagen in gegevens.
     """
-    qr = qrcode.QRCode(version=1,
-                       error_correction=qrcode.constants.ERROR_CORRECT_L,
-                       box_size=10,
-                       border=4,)
-    qr.add_data(str("Uw naam is: ") + gegevens[0] +("\n") + str("Uw ov-kaart nummer is: ") + gegevens[1] +("\n")
-    + str("Uw beginstation is: ") + gegevens[2] + str("\n") + str("Uw eindstation is: ") + gegevens[3])
-    qr.make(fit=True)
-    qr.get_matrix()
-    img = qr.make_image()
+    img = qrcode.make((str("Uw naam is: ") + gegevens[0] +("\n") + str("Uw OV-kaart nummer is: ") + gegevens[1] +("\n")
+    + str("Uw beginstation is: ") + gegevens[2] + str("\n") + str("Uw eindstation is: ") + gegevens[3]))
     img.show()
 
 
