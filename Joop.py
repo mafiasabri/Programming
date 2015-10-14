@@ -16,7 +16,7 @@ def tableCreate(f,c):
     """
     if not f:
         c.execute("CREATE TABLE ReizigersDB(ID CHAR(50), Naam TEXT, OVnummer INT, Beginstation TEXT, Eindstation TEXT)")
-    else :
+    else:
         print("")
 
 
@@ -27,7 +27,7 @@ def dataEntry():
     :return: None
     """
     with conn:
-        date = str(datetime.datetime.fromtimestamp(int(time.time())).strftime('%Y%m%d%H%M%S'))
+        date = str(datetime.datetime.fromtimestamp(int(time.time())).strftime("%Y%m%d%H%M%S"))
         c.execute("INSERT INTO ReizigersDB (ID, Naam, OVnummer, Beginstation, Eindstation) VALUES (?, ?, ?, ?, ?)",
                   (date + gegevens[1], gegevens[0], gegevens[1], gegevens[2], gegevens[3]))
 
@@ -39,9 +39,8 @@ def nsAPI():
     :return: stations
     """
     auth_details = ("hjr.tielemans@gmail.com", "sz3XpDnQ5EVcA8Gg4FhuWICzhJgmMOnehAIoElLW3iVP1wyJ5p8OuQ")
-    response = requests.get('http://webservices.ns.nl/ns-api-stations-v2',
+    response = requests.get("http://webservices.ns.nl/ns-api-stations-v2",
                             auth=auth_details)
-    #global stations
     stations = response.text
     return stations
 
@@ -121,7 +120,7 @@ def generateQR(gegevens):
     Deze functie genereert een QR-code op basis van de reizigersID
     Dit gebeurt op basis van de input van de gebruiker. De input is opgeslagen in gegevens.
     """
-    img = qrcode.make((str("Uw naam is: ") + gegevens[0] +("\n") + str("Uw OV-kaart nummer is: ") + gegevens[1] +("\n")
+    img = qrcode.make((str("Uw naam is: ") + gegevens[0] + ("\n") + str("Uw OV-kaart nummer is: ") + gegevens[1] +("\n")
     + str("Uw beginstation is: ") + gegevens[2] + str("\n") + str("Uw eindstation is: ") + gegevens[3]))
     img.show()
 
@@ -131,7 +130,7 @@ def invoer_incheckzuil():
     Label(master, text="Voer ov-chipkaartnummer in").grid(row=0)
     e1 = Entry(master)
     e1.grid(row=0, column=1)
-    Button(master, text='Invoeren', command=master.quit).grid(row=0, column=4 , sticky=W, pady=20)
+    Button(master, text="Invoeren", command=master.quit).grid(row=0, column=4 , sticky=W, pady=20)
     mainloop()
     Z = e1.get()
     return Z
@@ -141,8 +140,8 @@ def vergelijk_database(Z):
     with conn:
         c = conn.cursor()
         t = (Z,)
-    for row in c.execute('SELECT * FROM ReizigersDB'):
-        if row in c.execute('SELECT * FROM ReizigersDB WHERE OVnummer=?', t):
+    for row in c.execute("SELECT * FROM ReizigersDB"):
+        if row in c.execute("SELECT * FROM ReizigersDB WHERE OVnummer=?", t):
             print(row)
         else:
             print("U heeft nog geen reis gemaakt of een verkeerd OVnummer ingetyped")
@@ -155,7 +154,7 @@ def vergelijk_database(Z):
 # def database_leeghalen:
 
 f = os.path.isfile("Reizigers.db")
-conn = sqlite3.connect('Reizigers.db')
+conn = sqlite3.connect("Reizigers.db")
 c = conn.cursor()
 tableCreate(f,c)
 nsAPI()
