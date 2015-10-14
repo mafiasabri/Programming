@@ -1,7 +1,7 @@
 from tkinter import *
 import sqlite3
 
-
+"""Invoer in de incheckzuil via TKinter"""
 def invoer_incheckzuil():
     TKintermenu = Tk()
     Label(TKintermenu, text="Voer ov-chipkaartnummer in").grid(row=0)
@@ -12,7 +12,7 @@ def invoer_incheckzuil():
     invoer = invoerveld.get()
     return invoer
 
-
+"""Vergelijkt invoer van de vorige functie in de database en aan de hand van de invoer informatie aan de gebruiker"""
 def vergelijk_database(invoer):
     conn = sqlite3.connect('Reizigers.db')
     cursor = conn.cursor()
