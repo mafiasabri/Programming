@@ -124,35 +124,6 @@ def generateQR(gegevens):
     img = qrcode.make(("Uw unieke reis ID is: ") + dataEntry() +  ("\n") + (str("Uw naam is: ") + gegevens[0] + ("\n") + str("Uw OV-kaart nummer is: ") + gegevens[1] +("\n") + str("Uw beginstation is: ") + gegevens[2] + str("\n") + str("Uw eindstation is: ") + gegevens[3]))
     img.show()
 
-
-def invoer_incheckzuil():
-    master = Tk()
-    Label(master, text="Voer ov-chipkaartnummer in").grid(row=0)
-    e1 = Entry(master)
-    e1.grid(row=0, column=1)
-    Button(master, text="Invoeren", command=master.quit).grid(row=0, column=4 , sticky=W, pady=20)
-    mainloop()
-    Z = e1.get()
-    return Z
-
-
-def vergelijk_database(Z):
-    with conn:
-        c = conn.cursor()
-        t = (Z,)
-    for row in c.execute("SELECT * FROM ReizigersDB"):
-        if row in c.execute("SELECT * FROM ReizigersDB WHERE OVnummer=?", t):
-            print(row)
-        else:
-            print("U heeft nog geen reis gemaakt of een verkeerd OVnummer ingetyped")
-
-# Zorg als laatste dat je voor de NS­marketingafdeling een (automatisch) overzicht genereert van:
-# ● het aantal reizen per ov­chipkaart,
-# ● de populairste bestemmingen, en
-# ● de populairste vertrekstations.
-
-# def database_leeghalen:
-
 f = os.path.isfile("Reizigers.db")
 conn = sqlite3.connect("Reizigers.db")
 c = conn.cursor()
@@ -161,4 +132,4 @@ nsAPI()
 welkomprint()
 gegevens = controle_gegevens()
 generateQR(gegevens)
-vergelijk_database(invoer_incheckzuil())
+
