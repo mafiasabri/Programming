@@ -31,7 +31,7 @@ def dataEntry():
         date = str(datetime.datetime.fromtimestamp(int(time.time())).strftime("%Y%m%d%H%M%S"))
         uniekID = (date + ',' + gegevens[1] + ',' + gegevens[0] + ',' + gegevens[2] + ',' + gegevens[3])
         c.execute("INSERT INTO ReizigersDB (ID, Naam, OVnummer, Beginstation, Eindstation) VALUES (?, ?, ?, ?, ?)",
-                  (uniekID , gegevens[0], gegevens[1], gegevens[2], gegevens[3]))
+                  (uniekID, gegevens[0], gegevens[1], gegevens[2], gegevens[3]))
     return uniekID
 
 
@@ -78,11 +78,10 @@ def input_character(prompt):
     :return:str(invoer)
     """
     invoer = input(prompt)
-    while invoer and invoer.isalpha()== True:
+    while invoer and invoer.isalpha() == True:
         return str(invoer)
-    else:
-        print("De invoer is niet correct. Probeer het opnieuw.")
-        return input_character(prompt)
+    print("De invoer is niet correct. Probeer het opnieuw.")
+    return input_character(prompt)
 
 
 def controle_gegevens():
@@ -158,7 +157,7 @@ def vergelijk_database(Z):
 f = os.path.isfile("Reizigers.db")
 conn = sqlite3.connect("Reizigers.db")
 c = conn.cursor()
-tableCreate(f,c)
+tableCreate(f, c)
 nsAPI()
 welkomprint()
 gegevens = controle_gegevens()
