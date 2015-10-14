@@ -1,6 +1,5 @@
 from tkinter import *
 import sqlite3
-from collections import Counter
 import collections
 
 def connector():
@@ -8,38 +7,37 @@ def connector():
     cursor = conn.cursor()
     return cursor
 
-# def invoer_incheckzuil():
-#     """
-#     Invoer in de incheckzuil via TKinter
-#     :return: invoer
-#     """
-#     TKintermenu = Tk()
-#     Label(TKintermenu, text="Voer ov-chipkaartnummer in").grid(row=0)
-#     invoerveld = Entry(TKintermenu)
-#     invoerveld.grid(row=0, column=1)
-#     Button(TKintermenu, text='Invoeren', command=TKintermenu.quit).grid(row=0, column=4 , sticky=W, pady=20)
-#     mainloop()
-#     invoer = invoerveld.get()
-#     return invoer
+def invoer_incheckzuil():
+    """
+    Invoer in de incheckzuil via TKinter
+    :return: invoer
+    """
+    TKintermenu = Tk()
+    Label(TKintermenu, text="Voer ov-chipkaartnummer in").grid(row=0)
+    invoerveld = Entry(TKintermenu)
+    invoerveld.grid(row=0, column=1)
+    Button(TKintermenu, text='Invoeren', command=TKintermenu.quit).grid(row=0, column=4 , sticky=W, pady=20)
+    mainloop()
+    invoer = invoerveld.get()
+    return invoer
 
 
-# def vergelijk_database(invoer,cursor):
-#     """
-#     Vergelijkt invoer van de vorige functie in de database en aan de hand van de invoer informatie aan de gebruiker
-#     :param invoer:
-#     :return: None
-#     """
-#     waardeinvoer = (invoer,)
-#     databasewaarden = cursor.execute('SELECT * FROM ReizigersDB WHERE OVnummer =?', waardeinvoer)
-#     resultaten = databasewaarden.fetchall()
-#     teller = len(resultaten)
-#     print(teller)
-#     if teller == 0:
-#         print("Dit OVnummer is nog niet in onze database bekend.")
-#     for row in resultaten:
-#         print(row)
-
-
+def vergelijk_database(invoer,cursor):
+    """
+    Vergelijkt invoer van de vorige functie in de database en aan de hand van de invoer informatie aan de gebruiker
+    :param invoer:
+    :return: None
+    """
+    waardeinvoer = (invoer,)
+    databasewaarden = cursor.execute('SELECT * FROM ReizigersDB WHERE OVnummer =?', waardeinvoer)
+    resultaten = databasewaarden.fetchall()
+    teller = len(resultaten)
+    if teller == 0:
+        print("Dit OVnummer is nog niet in onze database bekend.")
+    for row in resultaten:
+        print ("\n")
+        for i in row:
+            print(i)
 
 def populairste_vertrekstation(cursor):
     connector()
@@ -64,15 +62,13 @@ def aantal_reizen_per_ov(cursor):
     ovnummer= []
     for row in resultaten:
         ovnummer += row
-    c = collections.Counter(ovnummer)
-    for letter in ovnummer:
-        print (letter, c[letter])
-    # print (Counter(ovnummer))
-
-
-
+    counter = collections.Counter(ovnummer)
+    for letter in counter:
+        print (letter, counter[letter])
 
 aantal_reizen_per_ov(connector())
+print()
 populairste_bestemming(connector())
 populairste_vertrekstation(connector())
-# vergelijk_database(invoer_incheckzuil(),connector())
+print()
+vergelijk_database(invoer_incheckzuil(),connector())
