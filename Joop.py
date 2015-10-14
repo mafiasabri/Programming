@@ -96,7 +96,7 @@ def controle_gegevens():
     ovnummer = input_integer("Voer uw ov-chipkaartnummer in: ")
     ovnummer = str(ovnummer)
     while len(ovnummer) != 8:
-        print("Error! Voer een geldige 16 cijferige ov-chipkaartnummer in!")
+        print("Error! Voer een geldige 8 cijferige ov-chipkaartnummer in!")
         ovnummer = input_integer("Voer uw ov-chipkaartnummer in: ")
         ovnummer = str(ovnummer)
     beginstation = input_character("Voer uw beginstation in: ")
