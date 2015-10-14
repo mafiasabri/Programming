@@ -26,10 +26,12 @@ def dataEntry():
     een unieke reizigersID.
     :return: None
     """
+
     with conn:
         date = str(datetime.datetime.fromtimestamp(int(time.time())).strftime("%Y%m%d%H%M%S"))
+        uniekID = (date + ',' + gegevens[1] + ',' + gegevens[0] + ',' + gegevens[2] + ',' + gegevens[3])
         c.execute("INSERT INTO ReizigersDB (ID, Naam, OVnummer, Beginstation, Eindstation) VALUES (?, ?, ?, ?, ?)",
-                  (date + ',' + gegevens[1] + ',' + gegevens[0] + ',' + gegevens[2] + ',' + gegevens[3] , gegevens[0], gegevens[1], gegevens[2], gegevens[3]))
+                  (uniekID , gegevens[0], gegevens[1], gegevens[2], gegevens[3]))
 
 
 
