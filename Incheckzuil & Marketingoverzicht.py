@@ -48,7 +48,7 @@ def populairste_vertrekstation(cursor):
     """
     Hier word de volledig database in een tuple gezet om vervolgens uit die tuple het populairste vertrekstation te halen.
     :param cursor:
-    :return: None
+    :return: populairste_vertrek
     """
     database_eindstation = cursor.execute('SELECT Eindstation FROM ReizigersDB')
     eindstation = []
@@ -61,7 +61,7 @@ def populairste_bestemming(cursor):
     """
     Hier word de volledig database in een tuple gezet om vervolgens uit die tuple de populairste bestemming te halen.
     :param cursor:
-    :return: None
+    :return: populairste_best
     """
     database_beginstation = cursor.execute('SELECT Beginstation FROM ReizigersDB')
     beginstation = []
@@ -74,7 +74,7 @@ def aantal_reizen_per_ov(cursor):
     """
     Hier word de volledig database in een tuple gezet om vervolgens alle aparte ovnummers eruit te halen en te laten zien hoevaak hiermee gereisd is.
     :param cursor:
-    :return: None
+    :return: str(minidatabase)
     """
     databasewaarden = cursor.execute('SELECT OVnummer FROM ReizigersDB')
     resultaten = databasewaarden.fetchall()
