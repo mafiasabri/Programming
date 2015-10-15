@@ -3,7 +3,7 @@ import sqlite3
 import collections
 
 def connector():
-    conn = sqlite3.connect('Reizigers.db')
+    conn = sqlite3.connect("Reizigers.db")
     cursor = conn.cursor()
     return cursor
 
@@ -20,7 +20,6 @@ def invoer_incheckzuil():
     mainloop()
     invoer = invoerveld.get()
     return invoer
-
 
 def vergelijk_database(invoer,cursor):
     """
@@ -47,7 +46,6 @@ def populairste_vertrekstation(cursor):
         eindstation += row
     print("Het populairste vertrekstation is: " + max(eindstation))
 
-
 def populairste_bestemming(cursor):
     connector()
     database_beginstation = cursor.execute('SELECT Beginstation FROM ReizigersDB')
@@ -72,3 +70,4 @@ populairste_bestemming(connector())
 populairste_vertrekstation(connector())
 print()
 vergelijk_database(invoer_incheckzuil(),connector())
+

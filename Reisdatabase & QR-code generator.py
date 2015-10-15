@@ -18,10 +18,9 @@ def tableCreate(f,c):
     else:
         print("")
 
-
 def dataEntry():
     """
-    Deze functie voegt de input(controle_gegevens()) van de gebruiker toe in de database. Daarnaast genereert de functie
+    Deze functie voegt de input controle_gegevens() van de gebruiker toe in de database. Daarnaast genereert de functie
     een unieke reizigersID.
     :return: None
     """
@@ -32,9 +31,6 @@ def dataEntry():
         cursor.execute("INSERT INTO ReizigersDB (ID, Naam, OVnummer, Beginstation, Eindstation) VALUES (?, ?, ?, ?, ?)",
                   (uniekID, gegevens[0], gegevens[1], gegevens[2], gegevens[3]))
     return uniekID
-
-
-
 
 def nsAPI():
     """
@@ -48,19 +44,17 @@ def nsAPI():
     stations = response.text
     return stations
 
-
 def welkomprint():
     """
-    Toont introductie en instructie.
+    Toont introductie en instructie aan de reiziger.
     :return:None
     """
     print("Welkom bij de NS. \nVoer nu onderstaande informatie in om verder te gaan.")
 
-
 def input_integer(prompt):
     """
-    De input moet bestaan uit enkel getallen, als dit niet het geval is wordt dit aangegeven.
-    De functie zal dan vragen om een nieuwe input.
+    De input mag uit enkel getallen bestaan, als dit niet het geval is wordt dit aangegeven.
+    De functie zal dan opnieuw vragen om input.
     :return:int(invoer)
     """
     invoer = input(prompt)
@@ -69,11 +63,10 @@ def input_integer(prompt):
     print("De invoer is niet correct en moet bestaan uit cijfers. Probeer het opnieuw.")
     return input_integer(prompt)
 
-
 def input_character(prompt):
     """
-    De input moet bestaan uit enkel letters, als dit niet het geval is wordt dit aangegeven.
-    De functie zal dan vragen om een nieuwe input.
+    De input mag uit enkel letters bestaan, als dit niet het geval is wordt dit aangegeven.
+    De functie zal dan opnieuw vragen om input.
     :return:str(invoer)
     """
     invoer = input(prompt)
@@ -82,14 +75,13 @@ def input_character(prompt):
     print("De invoer is niet correct. Probeer het opnieuw.")
     return input_character(prompt)
 
-
 def controle_gegevens():
     """
     In deze functie wordt er gevraagd om de input van de gebruikers, met als criteria:
     Bij ovnummer is alleen een input geldig van nummers.
     Het beginstation en eindstation moet voorkomen in de nsAPI.
     Daarnaast mogen het begin en eindstation niet hetzelfde zijn.
-    Als de bovenstaande gegevens correct zijn worden opgeslagen in gegevens
+    Als de bovenstaande gegevens correct zijn worden deze opgeslagen in gegevens
     :return:gegevens
     """
     stations = nsAPI()
@@ -114,14 +106,14 @@ def controle_gegevens():
     gegevens = naam, ovnummer, beginstation, eindstation
     return gegevens
 
-
 def generateQR(gegevens):
     """
-    Deze functie genereert een QR-code op basis van de reizigersID
-    Dit gebeurt op basis van de input van de gebruiker. De input is opgeslagen in gegevens.
+    Deze functie genereert een QR-code op basis het ReisID, deze word gegenereerd uit de gegevens die de klant als input geeft.
     """
     img = qrcode.make(("Uw unieke reis ID is: ") + dataEntry() +  ("\n\n") + (str("Uw naam is: ") + gegevens[0] + ("\n") + str("Uw OV-kaart nummer is: ") + gegevens[1] +("\n") + str("Uw beginstation is: ") + gegevens[2] + str("\n") + str("Uw eindstation is: ") + gegevens[3]))
     img.show()
+
+
 
 
 f = os.path.isfile("Reizigers.db")
