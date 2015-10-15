@@ -88,6 +88,13 @@ def aantal_reizen_per_ov(cursor):
     return(str(minidatabase))
 
 def schrijven_naar_txt(minidatabase, populairste_best, populairste_vertek):
+    """
+    Hier worden de gegevens van populairste_vertrekstation(), populairste_bestemming() & aantal_reizen_per_ov() in een txt. bestand gezet.
+    :param minidatabase:
+    :param populairste_best:
+    :param populairste_vertek:
+    :return: None
+    """
     file = open("Marketingverslag.txt","w")
     file.writelines(minidatabase)
     file.writelines(populairste_best)
