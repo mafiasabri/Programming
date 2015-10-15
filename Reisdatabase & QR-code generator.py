@@ -6,15 +6,13 @@ import os.path
 import datetime
 import time
 
-
-
-def tableCreate(f,c):
+def tableCreate(file,conn):
     """
     Deze functie maakt eenmalig een tabel aan in de database.
     :return: None
     """
-    if not f:
-        c.execute("CREATE TABLE ReizigersDB(ID CHAR(100), Naam TEXT, OVnummer INT, Beginstation TEXT, Eindstation TEXT)")
+    if not file:
+        conn.execute("CREATE TABLE ReizigersDB(ID CHAR(100), Naam TEXT, OVnummer INT, Beginstation TEXT, Eindstation TEXT)")
     else:
         print("")
 
@@ -116,10 +114,10 @@ def generateQR(gegevens):
 
 
 
-f = os.path.isfile("Reizigers.db")
+file = os.path.isfile("Reizigers.db")
 conn = sqlite3.connect("Reizigers.db")
 cursor = conn.cursor()
-tableCreate(f, cursor)
+tableCreate(file, cursor)
 nsAPI()
 welkomprint()
 gegevens = controle_gegevens()

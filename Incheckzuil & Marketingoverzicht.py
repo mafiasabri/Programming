@@ -39,7 +39,6 @@ def vergelijk_database(invoer,cursor):
             print(i)
 
 def populairste_vertrekstation(cursor):
-    connector()
     database_eindstation = cursor.execute('SELECT Eindstation FROM ReizigersDB')
     eindstation = []
     for row in database_eindstation:
@@ -47,7 +46,6 @@ def populairste_vertrekstation(cursor):
     print("Het populairste vertrekstation is: " + max(eindstation))
 
 def populairste_bestemming(cursor):
-    connector()
     database_beginstation = cursor.execute('SELECT Beginstation FROM ReizigersDB')
     beginstation = []
     for row in database_beginstation:
