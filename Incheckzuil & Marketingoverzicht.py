@@ -96,8 +96,8 @@ def schrijven_naar_txt(minidatabase, populairste_best, populairste_vertek):
     :return: None
     """
     file = open("Marketingverslag.txt","w")
-    file.writelines(minidatabase)
-    file.writelines(populairste_best)
+    file.writelines(minidatabase + "\n")
+    file.writelines(populairste_best + "\n")
     file.writelines(populairste_vertek)
 
 aantal_reis = aantal_reizen_per_ov(connector())
