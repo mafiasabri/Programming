@@ -46,7 +46,7 @@ def vergelijk_database(invoer,cursor):
 
 def populairste_vertrekstation(cursor):
     """
-    Hier word de volledig database in een tuple gezet om vervolgens uit die tuple het populairste vertrekstation te halen.
+    Hier word de volledig database in een list gezet om vervolgens uit die list het populairste vertrekstation te halen.
     :param cursor:
     :return: populairste_vertrek
     """
@@ -59,7 +59,7 @@ def populairste_vertrekstation(cursor):
 
 def populairste_bestemming(cursor):
     """
-    Hier word de volledig database in een tuple gezet om vervolgens uit die tuple de populairste bestemming te halen.
+    Hier word de volledig database in een list gezet om vervolgens uit die list de populairste bestemming te halen.
     :param cursor:
     :return: populairste_best
     """
@@ -72,7 +72,8 @@ def populairste_bestemming(cursor):
 
 def aantal_reizen_per_ov(cursor):
     """
-    Hier word de volledig database in een tuple gezet om vervolgens alle aparte ovnummers eruit te halen en te laten zien hoevaak hiermee gereisd is.
+    Hier word de volledig database in een list gezet om vervolgens alle aparte ovnummers eruit te halen
+    en te laten zien hoevaak hiermee gereisd is.
     :param cursor:
     :return: str(minidatabase)
     """
