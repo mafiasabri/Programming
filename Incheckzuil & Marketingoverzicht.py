@@ -3,13 +3,19 @@ import sqlite3
 import collections
 
 def connector():
+    """
+    Bij deze functie word er een verbinding gemaakt met de database (in dit geval "Reizigers.db").
+    Hierna word een command toegeveogd om er bepaalde gegevens uit te halen en deze word vervolgens teruggeven om in volgende functies te gebruiken.
+    :return: cursor
+    """
     conn = sqlite3.connect("Reizigers.db")
     cursor = conn.cursor()
     return cursor
 
 def invoer_incheckzuil():
     """
-    Invoer in de incheckzuil via TKinter
+    Deze functie het Tkintermenu om een OV-nummer in te noteren.
+    vervolgens geeft hij de invoer terug om er bij een volgende functie de bijpassende gevens bij te kunnen halen.
     :return: invoer
     """
     TKintermenu = Tk()
@@ -23,7 +29,7 @@ def invoer_incheckzuil():
 
 def vergelijk_database(invoer,cursor):
     """
-    Vergelijkt invoer van de vorige functie in de database en aan de hand van de invoer informatie aan de gebruiker
+    Hier word de invoer van invoer_incheckzuil() erbij genomen om vervolgens te kijken of deze in de database voorkomt, en zo ja; hoe vaak.
     :param invoer:
     :return: None
     """
@@ -39,6 +45,11 @@ def vergelijk_database(invoer,cursor):
             print(i)
 
 def populairste_vertrekstation(cursor):
+    """
+    Hier word de volledig database in een tuple gezet om vervolgens uit die tuple het populairste vertrekstation te halen.
+    :param cursor:
+    :return: None
+    """
     database_eindstation = cursor.execute('SELECT Eindstation FROM ReizigersDB')
     eindstation = []
     for row in database_eindstation:
@@ -47,6 +58,11 @@ def populairste_vertrekstation(cursor):
     return populairste_vertrek
 
 def populairste_bestemming(cursor):
+    """
+    Hier word de volledig database in een tuple gezet om vervolgens uit die tuple de populairste bestemming te halen.
+    :param cursor:
+    :return: None
+    """
     database_beginstation = cursor.execute('SELECT Beginstation FROM ReizigersDB')
     beginstation = []
     for row in database_beginstation:
@@ -55,6 +71,11 @@ def populairste_bestemming(cursor):
     return populairste_best
 
 def aantal_reizen_per_ov(cursor):
+    """
+    Hier word de volledig database in een tuple gezet om vervolgens alle aparte ovnummers eruit te halen en te laten zien hoevaak hiermee gereisd is.
+    :param cursor:
+    :return: None
+    """
     databasewaarden = cursor.execute('SELECT OVnummer FROM ReizigersDB')
     resultaten = databasewaarden.fetchall()
     ovnummer= []
