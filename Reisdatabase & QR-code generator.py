@@ -104,14 +104,12 @@ def controle_gegevens():
     gegevens = naam, ovnummer, beginstation, eindstation
     return gegevens
 
-def generateQR(gegevens):
+def generateQR(gegevens,uniekID):
     """
     Deze functie genereert een QR-code op basis het reizigersID (Gemaakt in DataEntrry()), deze word gegenereerd uit de gegevens die de klant als input geeft.
     """
-    img = qrcode.make(("Uw unieke reis ID is: ") + dataEntry() +  ("\n\n") + (str("Uw naam is: ") + gegevens[0] + ("\n") + str("Uw OV-kaart nummer is: ") + gegevens[1] +("\n") + str("Uw beginstation is: ") + gegevens[2] + str("\n") + str("Uw eindstation is: ") + gegevens[3]))
+    img = qrcode.make(("Uw unieke reis ID is: ") + uniekID +  ("\n\n") + (str("Uw naam is: ") + gegevens[0] + ("\n") + str("Uw OV-kaart nummer is: ") + gegevens[1] +("\n") + str("Uw beginstation is: ") + gegevens[2] + str("\n") + str("Uw eindstation is: ") + gegevens[3]))
     img.show()
-
-
 
 
 file = os.path.isfile("Reizigers.db")
@@ -120,6 +118,7 @@ cursor = conn.cursor()
 tableCreate(file, cursor)
 nsAPI()
 welkomprint()
+
 gegevens = controle_gegevens()
-generateQR(gegevens)
+generateQR(gegevens,dataEntry())
 
