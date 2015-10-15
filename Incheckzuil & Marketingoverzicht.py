@@ -100,8 +100,7 @@ def schrijven_naar_txt(minidatabase, populairste_best, populairste_vertek):
     file.writelines(minidatabase + "\n")
     file.writelines(populairste_best + "\n")
     file.writelines(populairste_vertek)
-Bestand moet wel worden geclosed
-met f.closed
+    file.close()
 
 
 aantal_reis = aantal_reizen_per_ov(connector())
