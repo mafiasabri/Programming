@@ -62,6 +62,13 @@ def input_integer(prompt):
     print("De invoer is niet correct en moet bestaan uit cijfers. Probeer het opnieuw.")
     return input_integer(prompt)
 
+def input_length(prompt):
+    invoer = input(prompt)
+    while len(invoer)==0:
+        print ("U heeft niks ingevoerd")
+        invoer = input(prompt)
+    return input_length(prompt)
+
 def input_character(prompt):
     """
     De input mag uit enkel letters bestaan, als dit niet het geval is wordt dit aangegeven.
@@ -90,11 +97,11 @@ def controle_gegevens():
     while len(ovnummer) != 8:
         print("Error! Voer een geldige 8 cijferige ov-chipkaartnummer in!")
         ovnummer = str(input_integer("Voer uw ov-chipkaartnummer in: "))
-    beginstation = input_character("Voer uw beginstation in: ")
+    beginstation = input_length("Voer uw beginstation in: ")
     while beginstation not in stations:
         print("Het beginstation is niet bekend.")
         beginstation = input_character("Voer uw beginstation in: ")
-    eindstation = input("Voer uw eindstation in: ")
+    eindstation = input_length("Voer uw eindstation in: ")
     while eindstation not in stations:
         print("Het eindstation is niet bekend.")
         eindstation = input("Voer uw eindstation in: ")
