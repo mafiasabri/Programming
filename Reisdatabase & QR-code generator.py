@@ -84,8 +84,7 @@ def controle_gegevens():
     """
     stations = nsAPI()
     naam = input("Voer uw naam in: ")
-    ovnummer = input_integer("Voer uw ov-chipkaartnummer in: ")
-    ovnummer = str(ovnummer)
+    ovnummer = str(input_integer("Voer uw ov-chipkaartnummer in: "))
     while len(ovnummer) != 8:
         print("Error! Voer een geldige 8 cijferige ov-chipkaartnummer in!")
         ovnummer = input_integer("Voer uw ov-chipkaartnummer in: ")
