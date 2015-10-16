@@ -56,7 +56,8 @@ def input_integer(prompt):
     :return:int(invoer)
     """
     invoer = input(prompt)
-    while invoer and invoer.isdigit() == True:
+    check = True
+    while invoer and invoer.isdigit() == check:
         return int(invoer)
     print("De invoer is niet correct en moet bestaan uit cijfers. Probeer het opnieuw.")
     return input_integer(prompt)
@@ -68,7 +69,8 @@ def input_character(prompt):
     :return:str(invoer)
     """
     invoer = input(prompt)
-    while invoer and invoer.isalpha() == True:
+    check = True
+    while invoer and invoer.isalpha() == check:
         return str(invoer)
     print("De invoer is niet correct. Probeer het opnieuw.")
     return input_character(prompt)
@@ -87,8 +89,7 @@ def controle_gegevens():
     ovnummer = str(input_integer("Voer uw ov-chipkaartnummer in: "))
     while len(ovnummer) != 8:
         print("Error! Voer een geldige 8 cijferige ov-chipkaartnummer in!")
-        ovnummer = input_integer("Voer uw ov-chipkaartnummer in: ")
-        ovnummer = str(ovnummer)
+        ovnummer = str(input_integer("Voer uw ov-chipkaartnummer in: "))
     beginstation = input_character("Voer uw beginstation in: ")
     while beginstation not in stations:
         print("Het beginstation is niet bekend.")
@@ -117,7 +118,6 @@ cursor = conn.cursor()
 tableCreate(file, cursor)
 nsAPI()
 welkomprint()
-
 gegevens = controle_gegevens()
 generateQR(gegevens,dataEntry())
 
