@@ -114,6 +114,7 @@ def generateQR(gegevens,uniekID):
     img.show()
 
 
+
 file = os.path.isfile("Reizigers.db")
 conn = sqlite3.connect("Reizigers.db")
 cursor = conn.cursor()
