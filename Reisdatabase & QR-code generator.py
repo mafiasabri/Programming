@@ -56,7 +56,7 @@ def input_integer(prompt):
     :return:int(invoer)
     """
     invoer = input(prompt)
-    while invoer and invoer.isdigit():
+    if invoer and invoer.isdigit():
         return int(invoer)
     print("De invoer is niet correct en moet bestaan uit cijfers. Probeer het opnieuw.")
     return input_integer(prompt)
@@ -75,7 +75,7 @@ def input_character(prompt):
     :return:str(invoer)
     """
     invoer = input(prompt)
-    while invoer and invoer.isalpha():
+    if invoer and invoer.isalpha():
         return str(invoer)
     print("De invoer is niet correct. Probeer het opnieuw.")
     return input_character(prompt)
