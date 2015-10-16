@@ -109,6 +109,7 @@ def controle_gegevens():
 def generateQR(gegevens,uniekID):
     """
     Deze functie genereert een QR-code op basis het reizigersID (Gemaakt in DataEntrry()), deze word gegenereerd uit de gegevens die de klant als input geeft.
+    Ook aan de opmaak van de qrcode is gedacht.
     """
     img = qrcode.make(("Uw unieke reis ID is: ") + uniekID +  ("\n\n") + (str("Uw naam is: ") + gegevens[0] + ("\n") + str("Uw OV-kaart nummer is: ") + gegevens[1] +("\n") + str("Uw beginstation is: ") + gegevens[2] + str("\n") + str("Uw eindstation is: ") + gegevens[3]))
     img.show()
