@@ -49,36 +49,33 @@ def welkomprint():
     """
     print("Welkom bij de NS. \nVoer nu onderstaande informatie in om verder te gaan.")
 
-def input_integer(prompt):
+def recursie_input_length(prompt):
+    """
+    De input moet minstens 1 letter/cijfer bevatten, als dit niet het geval is wordt dit aangegeven.
+    De functie zal dan opnieuw vragen om input.
+    :param prompt:
+    :return: recursie_input_length(prompt)
+    """
+    invoer = str(input(prompt))
+    if len(invoer) != 0:
+           return invoer
+    else:
+           print("U moet wat invullen.")
+           return recursie_input_length(prompt)
+
+def recursie_input_integer(prompt):
     """
     De input mag uit enkel getallen bestaan, als dit niet het geval is wordt dit aangegeven.
     De functie zal dan opnieuw vragen om input.
-    :return:int(invoer)
+    :param prompt:
+    :return:
     """
     invoer = input(prompt)
     if invoer and invoer.isdigit():
-        return int(invoer)
-    print("De invoer is niet correct en moet bestaan uit cijfers. Probeer het opnieuw.")
-    return input_integer(prompt)
-
-def input_length(prompt):
-    invoer = input(prompt)
-    while len(invoer)==0:
-        print ("U heeft niks ingevoerd")
-        invoer = input(prompt)
-    return input_length(prompt)
-
-def input_character(prompt):
-    """
-    De input mag uit enkel letters bestaan, als dit niet het geval is wordt dit aangegeven.
-    De functie zal dan opnieuw vragen om input.
-    :return:str(invoer)
-    """
-    invoer = input(prompt)
-    if invoer and invoer.isalpha():
-        return str(invoer)
-    print("De invoer is niet correct. Probeer het opnieuw.")
-    return input_character(prompt)
+            return invoer
+    else:
+            print("De invoer is niet correct. Probeer het opnieuw.")
+            return recursie_input_integer(prompt)
 
 def controle_gegevens():
     """
@@ -91,21 +88,21 @@ def controle_gegevens():
     """
     stations = nsAPI()
     naam = input("Voer uw naam in: ")
-    ovnummer = str(input_integer("Voer uw ov-chipkaartnummer in: "))
+    ovnummer = str(recursie_input_integer("Voer uw ov-chipkaartnummer in: "))
     while len(ovnummer) != 8:
         print("Error! Voer een geldige 8 cijferige ov-chipkaartnummer in!")
-        ovnummer = str(input_integer("Voer uw ov-chipkaartnummer in: "))
-    beginstation = input_length("Voer uw beginstation in: ")
+        ovnummer = str(recursie_input_integer("Voer uw ov-chipkaartnummer in: "))
+    beginstation = recursie_input_length("Voer uw beginstation in: ")
     while beginstation not in stations:
         print("Het beginstation is niet bekend.")
-        beginstation = input_character("Voer uw beginstation in: ")
-    eindstation = input_length("Voer uw eindstation in: ")
+        beginstation = input("Voer uw beginstation in: ")
+    eindstation = recursie_input_length("Voer uw eindstation in: ")
     while eindstation not in stations:
         print("Het eindstation is niet bekend.")
         eindstation = input("Voer uw eindstation in: ")
     while beginstation == eindstation:
         print("Het eindstation mag niet hetzelfde zijn als het beginstation zijn.")
-        eindstation = input_character("Voer uw eindstation in: ")
+        eindstation = input("Voer uw eindstation in: ")
     gegevens = naam, ovnummer, beginstation, eindstation
     return gegevens
 
